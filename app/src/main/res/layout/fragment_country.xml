@@ -3,8 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/cardview_dark_background"
-
     >
+
+    <data>
+        <variable
+            name="selectedCountry"
+            type="com.jacky.kotlincountries.model.Country" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +24,8 @@
             android:layout_marginTop="7dp"
             android:minHeight="200dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher_round">
+            android:downloadUrl="@{selectedCountry.imageUrl}"
+            >
 
         </ImageView>
 
@@ -30,7 +36,7 @@
             android:layout_below="@+id/countryImage"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Name"
+            android:text="@{selectedCountry.countryName}"
             android:textColor="@color/cardview_light_background"
             android:textSize="20sp"
             android:textStyle="bold">
@@ -44,7 +50,7 @@
             android:layout_below="@+id/countryName"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Capital"
+            android:text="@{selectedCountry.countryCapital}"
             android:textColor="@color/cardview_light_background"
             android:textSize="16sp"
             android:textStyle="italic">
@@ -59,7 +65,7 @@
             android:layout_below="@+id/countryCapital"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Region"
+            android:text="@{selectedCountry.countryRegion}"
             android:textSize="16sp"
             android:textStyle="normal">
 
@@ -73,7 +79,7 @@
             android:layout_below="@+id/countryRegion"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Currency"
+            android:text="@{selectedCountry.countryCurrency}"
             android:textSize="16sp"
             android:textStyle="italic">
 
@@ -87,7 +93,7 @@
             android:textColor="@color/cardview_light_background"
             android:layout_centerHorizontal="true"
             android:layout_margin="7dp"
-            android:text="Country Language"
+            android:text="@{selectedCountry.countryLanguage}"
             android:textSize="16sp"
             android:textStyle="normal">
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jacky.kotlincountries.R
@@ -17,8 +18,8 @@ import com.jacky.kotlincountries.viewmodel.CountryViewModel
 
 class CountryFragment : Fragment() {
 
-    private var fragmentBinding: FragmentCountryBinding? = null
-
+    //private var fragmentBinding: FragmentCountryBinding? = null
+    private lateinit var dataBinding: FragmentCountryBinding
     private lateinit var viewModel: CountryViewModel
 
 
@@ -33,14 +34,15 @@ class CountryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_country, container, false)
+       dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_country,container,false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentCountryBinding.bind(view)
-        fragmentBinding = binding
+        //val binding = FragmentCountryBinding.bind(view)
+        //fragmentBinding = binding
         arguments?.let {
             countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
         }
@@ -54,10 +56,13 @@ class CountryFragment : Fragment() {
 
     private fun observerLiveData() {
 
-        val binding = fragmentBinding ?: return
+        //val binding = fragmentBinding ?: return
 
         viewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country ->
             country?.let {
+                dataBinding.selectedCountry = country
+
+                /*
                 binding.countryName.text = country.countryName
                 binding.countryCapital.text = country.countryCapital
                 binding.countryCurrency.text = country.countryCurrency
@@ -66,7 +71,7 @@ class CountryFragment : Fragment() {
                 context?.let {
                     binding.countryImage.getImageFromUrl(country.imageUrl, placeholderProgressBar(it))
                 }
-
+*/
             }
 
         })
